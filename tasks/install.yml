@@ -1,0 +1,24 @@
+---
+
+- name: install required packages
+  apt:
+    name: '{{ item }}'
+    state: 'present'
+    install_recommends: False
+  with_flattened:
+    - 'bind9'
+
+- name: Create directories
+  file:
+    path:   '{{ item.path }}'
+    state:  '{{ item.state  | default("directory") }}'
+    owner:  '{{ item.owner  | default("root") }}'
+    group:  '{{ item.group  | default("root") }}'
+    mode:   '{{ item.mode   | default("0755") }}'
+  with_items:
+    - { path: '/etc/bind/conf.d' }
+    - { path: '/etc/bind/master' }
+    - { path: '/etc/bind/slaves' }
+  when: (item.path is defined and item.path)
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

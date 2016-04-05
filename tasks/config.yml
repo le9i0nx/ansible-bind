@@ -1,0 +1,17 @@
+---
+
+- name: list dir
+  shell: find /etc/bind/conf.d/ -name "*.conf"
+  register: role_bind_register_dir
+  changed_when: false
+
+- name: Configure named.conf.local
+  template:
+    src: "etc/bind/named.conf.local.j2"
+    dest: '/etc/bind/named.conf.local'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: [ 'bind test config' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

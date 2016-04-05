@@ -1,0 +1,13 @@
+---
+
+# .. envvar:: bind_ferm_dependent_rules
+#
+# Configuration for ``iptables`` firewall managed by ``ferm``.
+bind_ferm_dependent_rules:
+
+  - type: 'accept'
+    dport: [ 'domain' ]
+    role: 'le9i0nx.bind'
+    accept_any: True
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
