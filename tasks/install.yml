@@ -10,15 +10,16 @@
 
 - name: Create directories
   file:
-    path:   '{{ item.path }}'
+    path:   '{{ item.path   | default(omit) }}'
     state:  '{{ item.state  | default("directory") }}'
     owner:  '{{ item.owner  | default("root") }}'
     group:  '{{ item.group  | default("root") }}'
     mode:   '{{ item.mode   | default("0755") }}'
+    src:    '{{ item.src    | default(omit) }}'
   with_items:
     - { path: '/etc/bind/conf.d' }
-    - { path: '/etc/bind/master' }
-    - { path: '/etc/bind/slaves' }
+    - { path: '/etc/bind/master', state: "link", src: "/var/lib/bind/" }
+    - { path: '/etc/bind/slaves', state: "link", src: "/var/cache/bind/" }
   when: (item.path is defined and item.path)
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

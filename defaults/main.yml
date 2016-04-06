@@ -1,7 +1,6 @@
 ---
 # .. envvar:: bind__conf_d
 #
-#bind__conf_d: []
 bind__conf_d: []
 
 #  - name: "explams.com"
