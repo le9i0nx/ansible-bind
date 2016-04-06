@@ -1,0 +1,9 @@
+//{{ ansible_managed }}
+zone "{{ item.name }}" {
+    type {% if (item.zone_slave|d() and item.zone_slave == true) %}slave{% else %}master{% endif %};
+    allow-update    { {% if item.allow_update is defined %}{% for i in item.allow_update %}{{i}}; {% endfor %}{% else %}none;{% endif %} };
+    allow-transfer  { {% if item.allow_transfer is defined %}{% for i in item.allow_transfer %}{{i}}; {% endfor %}{% else %}none;{% endif %} };
+    allow-notify    { {% if item.allow_transfer is defined %}{% for i in item.allow_transfer %}{{i}}; {% endfor %}{% else %}none;{% endif %} };
+
+    file "{% if (item.zone_slave|d() and item.zone_slave == true) %}slave{% else %}master{% endif %}/db.{{ item.name }}";
+};

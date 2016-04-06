@@ -1,4 +1,16 @@
 ---
+# .. envvar:: bind__conf_d
+#
+#bind__conf_d: []
+bind__conf_d: []
+
+#  - name: "explams.com"
+#    type: "zone"
+#    zone_slave: false
+#    allow_update: [ "key dhcp_key", "127.0.0.1"]
+#    allow_transfer:
+#      - "192.168.0.1"
+#      - "192.168.0.14"
 
 # .. envvar:: bind_ferm_dependent_rules
 #

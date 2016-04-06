@@ -1,5 +1,16 @@
 ---
 
+- name: Configure conf.d
+  template:
+    src: "etc/bind/conf.d/{{ item.type | default('default') }}.conf.j2"
+    dest: '/etc/bind/conf.d/{{ item.name }}.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items:
+    - '{{ bind__conf_d }}'
+  notify: [ 'bind test config' ]
+
 - name: list dir
   shell: find /etc/bind/conf.d/ -name "*.conf"
   register: role_bind_register_dir
