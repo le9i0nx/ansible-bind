@@ -1,0 +1,14 @@
+//{{ ansible_managed }}
+zone "{{ item.name }}" {
+    type {% if (item.zone_slave|d() and item.zone_slave == true) %}slave{% else %}master{% endif %};
+{% if (item.zone_slave|d() and item.zone_slave == true) %}
+    masters         { {% if item.masters is defined %}{% for i in item.masters %}{{i}}; {% endfor %}{% else %}none;{% endif %} };
+    notify no;
+{% else %}
+    allow-update    { {% if item.allow_update is defined %}{% for i in item.allow_update %}{{i}}; {% endfor %}{% else %}none;{% endif %} };
+    allow-transfer  { {% if item.allow_transfer is defined %}{% for i in item.allow_transfer %}{{i}}; {% endfor %}{% else %}none;{% endif %} };
+    also-notify     { {% if item.allow_transfer is defined %}{% for i in item.allow_transfer %}{{i}}; {% endfor %}{% else %}none;{% endif %} };
+{% endif %}
+
+    file "/etc/bind/{% if (item.zone_slave|d() and item.zone_slave == true) %}slave{% else %}master{% endif %}/db.{{ item.name }}";
+};
