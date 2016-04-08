@@ -1,5 +1,7 @@
 //{{ ansible_managed }}
 
-{% for item in role_bind_register_dir.stdout_lines %}
+{%  if role_bind_register_dir.stdout_lines is defined %}
+{%    for item in role_bind_register_dir.stdout_lines %}
 include "{{ item }}";
-{% endfor %}
+{%    endfor %}
+{%  endif %}

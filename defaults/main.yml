@@ -10,6 +10,12 @@ bind__conf_d: []
 #    allow_transfer:
 #      - "192.168.0.1"
 #      - "192.168.0.14"
+#
+#  - name: "explams_com_key"
+#    type: "key"
+#    secret: "......"
+#    ip:  "8.8.8.8"
+#
 
 # .. envvar:: bind_ferm_dependent_rules
 #

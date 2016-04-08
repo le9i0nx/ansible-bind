@@ -5,8 +5,8 @@
     src: "etc/bind/conf.d/{{ item.type | default('default') }}.conf.j2"
     dest: '/etc/bind/conf.d/{{ item.name }}.conf'
     owner: 'root'
-    group: 'root'
-    mode: '0644'
+    group: 'bind'
+    mode: '0640'
   with_items:
     - '{{ bind__conf_d }}'
   notify: [ 'bind test config' ]
@@ -15,11 +15,30 @@
   shell: find /etc/bind/conf.d/ -name "*.conf"
   register: role_bind_register_dir
   changed_when: false
+  always_run: yes
 
 - name: Configure named.conf.local
   template:
     src: "etc/bind/named.conf.local.j2"
     dest: '/etc/bind/named.conf.local'
+    owner: 'root'
+    group: 'bind'
+    mode: '0644'
+  notify: [ 'bind test config' ]
+
+- name: Configure named.conf.options
+  template:
+    src: "etc/bind/named.conf.options.j2"
+    dest: '/etc/bind/named.conf.options'
+    owner: 'root'
+    group: 'bind'
+    mode: '0644'
+  notify: [ 'bind test config' ]
+
+- name: Configure default
+  template:
+    src: "etc/default/bind9.j2"
+    dest: '/etc/default/bind9'
     owner: 'root'
     group: 'root'
     mode: '0644'

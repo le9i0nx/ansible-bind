@@ -1,0 +1,11 @@
+//{{ ansible_managed }}
+key {{ item.name }} {
+    algorithm HMAC-MD5;
+    secret "{{ item.key }}";
+};
+
+{% if item.ip is defined %}
+server {{ item.ip }} {
+    keys { {{ item.name }}; };
+};
+{% endif %}
