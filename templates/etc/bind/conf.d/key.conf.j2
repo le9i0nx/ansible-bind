@@ -1,5 +1,5 @@
 //{{ ansible_managed }}
-key "{{ item.name }}" {
+key {{ item.name }} {
     algorithm HMAC-MD5;
     secret "{{ item.key }}";
 };
