@@ -24,6 +24,7 @@ bind_ferm_dependent_rules:
 
   - type: 'accept'
     dport: [ 'domain' ]
+    protocol: [ 'tcp','udp' ]
     role: 'le9i0nx.bind'
     accept_any: True
 

@@ -10,5 +10,5 @@ zone "{{ item.name }}" {
     also-notify     { {% if item.allow_transfer is defined %}{% for i in item.allow_transfer %}{{i}}; {% endfor %}{% else %}none;{% endif %} };
 {% endif %}
 
-    file "/etc/bind/{% if (item.zone_slave|d() and item.zone_slave == true) %}slave{% else %}master{% endif %}/db.{{ item.name }}";
+    file "{% if (item.zone_slave|d() and item.zone_slave == true) %}/var/cache/bind{% else %}/etc/bind/master{% endif %}/db.{{ item.name }}";
 };
