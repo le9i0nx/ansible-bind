@@ -1,7 +1,10 @@
 ---
 # .. envvar:: bind__conf_d
 #
-bind__conf_d: []
+bind__conf_d: '{{ bind__conf_d_default + bind__conf_d_group + bind__conf_d_host }}'
+bind__conf_d_default: []
+bind__conf_d_group: []
+bind__conf_d_host: []
 
 #  - name: "explams.com"
 #    type: "zone"

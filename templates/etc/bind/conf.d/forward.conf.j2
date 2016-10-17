@@ -1,0 +1,6 @@
+//{{ ansible_managed }}
+zone "{{ item.name }}" {
+    type forward;
+    forward only;
+    forwarders { {% if item.forward is defined %}{% for i in item.forward %}{{i}}; {% endfor %}{% else %}none;{% endif %} };
+};

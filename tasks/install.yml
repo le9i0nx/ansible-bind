@@ -19,8 +19,8 @@
     src:    '{{ item.src    | default(omit) }}'
   with_items:
     - { path: '/etc/bind/conf.d' }
-    - { path: '/etc/bind/master', state: "link", src: "/var/lib/bind/" }
-    - { path: '/etc/bind/slaves', state: "link", src: "/var/cache/bind/" }
+    - { path: '/etc/bind/master', state: "link", src: "/var/lib/bind/", mode: "0777" }
+    - { path: '/etc/bind/slaves', state: "link", src: "/var/cache/bind/", mode: "0777" }
   when: (item.path is defined and item.path)
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
