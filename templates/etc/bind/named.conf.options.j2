@@ -1,4 +1,11 @@
 //{{ ansible_managed }}
+// bug нужно сделать динамическую реализацию
+acl internals {
+    127.0.0.0/8;
+    192.168.0.0/16;
+};
+
+
 options {
     directory "/var/cache/bind";
     dnssec-must-be-secure rn no;
@@ -8,4 +15,7 @@ options {
     listen-on { any; };
     # Disabling IPv6 lookups
     filter-aaaa-on-v4 yes;
+    allow-recursion     { internals; };
+    allow-query-cache   { internals; };
+    allow-query         { internals; };
 };

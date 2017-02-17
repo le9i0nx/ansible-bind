@@ -15,7 +15,7 @@
   shell: find /etc/bind/conf.d/ -name "*.conf"
   register: role_bind_register_dir
   changed_when: false
-  always_run: yes
+  check_mode: no
 
 - name: Configure named.conf.local
   template:
